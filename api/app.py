@@ -122,17 +122,13 @@ def load_teachers():
     with open(TEACHER_FILE) as f:
         return json.load(f)
 
-def save_teachers(data):
-    with open(TEACHER_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+
 
 def load_mtech():
     with open(MTECH_FILE) as f:
         return json.load(f)
 
-def save_mtech(data):
-    with open(MTECH_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+
 
 
 @app.route("/faculty")
@@ -233,12 +229,11 @@ def faculty_generate():
 
                 mtech["count"] += 1
 
-    save_teachers(teachers)
-    save_mtech(mtech_list)
-
-    with open(SCHEDULE_FILE, "w") as f:
-        json.dump(allocation, f, indent=4)
-
+    
+    global generated_data
+    generated_data = allocation
+    
+    
     return redirect(url_for("faculty_schedule"))
 
 
@@ -247,8 +242,8 @@ def faculty_schedule():
 
     teachers = load_teachers()
 
-    with open(SCHEDULE_FILE) as f:
-        allocation = json.load(f)
+    global generated_data
+    allocation = generated_data
 
     schedule_table = {}
 
@@ -279,13 +274,15 @@ def faculty_edit():
 
     teachers = load_teachers()
 
+    global generated_data
+    allocation = generated_data
+
     old_teacher = request.form["old_teacher"]
     new_teacher = request.form["new_teacher"]
     classroom = request.form["classroom"]
     day = request.form["day"]
 
-    with open(SCHEDULE_FILE) as f:
-        allocation = json.load(f)
+    
 
     for a in allocation:
         if a["day"] == day and a["teacher"] == new_teacher and a["classroom"] != classroom:
@@ -297,14 +294,13 @@ def faculty_edit():
         if t["name"] == new_teacher:
             t["count"] += 1
 
-    save_teachers(teachers)
+ 
 
     for a in allocation:
         if a["teacher"] == old_teacher and a["classroom"] == classroom and a["day"] == day:
             a["teacher"] = new_teacher
+    generated_data = allocation
 
-    with open(SCHEDULE_FILE, "w") as f:
-        json.dump(allocation, f, indent=4)
 
     return redirect(url_for("faculty_schedule"))
 
@@ -314,8 +310,8 @@ def faculty_download():
 
     from io import BytesIO
 
-    with open(SCHEDULE_FILE) as f:
-        allocation = json.load(f)
+    global generated_data
+    allocation = generated_data
 
     df = pd.DataFrame(allocation)
 
