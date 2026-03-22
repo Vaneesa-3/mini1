@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Schedule</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_friend.css') }}">
+</head>
+<body>
+<div class="container">
+
+<h2>Generated Time Table</h2>
+
+{% for semester, exams in data.items() %}
+
+    <h3>{{ semester }}</h3>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Session</th>
+            <th>Time</th>
+            <th>Slot</th>
+            <th>Subject</th>
+        </tr>
+
+        {% for exam in exams %}
+        <tr>
+            <td>{{ exam.date }}</td>
+            <td>{{ exam.session }}</td>
+            <td>{{ exam.time }}</td>
+            <td>{{ exam.slot }}</td>
+            <td>{{ exam.subject }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+{% endfor %}
+
+<br>
+<a href="/download-pdf">
+    <button>Download PDF</button>
+</a>
+<br><br>
+<a href="/">Go Back</a>
+
+</div>
+</body>
+</html>

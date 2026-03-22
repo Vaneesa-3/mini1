@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Invigilator Allocation</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+<h1>Invigilator Allocation Result</h1>
+</div>
+
+<div class="container">
+
+<h2>Exam Duty Timetable</h2>
+
+<table class="result-table">
+
+<tr>
+
+<th>Classroom</th>
+
+{% set days = allocation | map(attribute='day') | unique | list %}
+
+{% for d in days %}
+<th>{{d}}</th>
+{% endfor %}
+
+</tr>
+
+{% for room, days_data in schedule_table.items() %}
+
+<tr>
+
+<td><b>{{room}}</b></td>
+
+{% for d in days %}
+
+<td>
+
+{% if d in days_data %}
+
+{% for t in days_data[d] %}
+{{t}}<br>
+{% endfor %}
+
+{% endif %}
+
+</td>
+
+{% endfor %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<h2>Editable Duty List</h2>
+
+<table class="result-table">
+
+<tr>
+<th>Day</th>
+<th>Classroom</th>
+<th>Teacher</th>
+<th>Role</th>
+<th>Edit</th>
+</tr>
+
+{% for a in allocation %}
+
+<tr>
+
+<td>{{a.day}}</td>
+<td>{{a.classroom}}</td>
+<td>{{a.teacher}}</td>
+<td>{{a.role}}</td>
+
+<td>
+
+<form method="POST" action="/faculty_edit">
+
+<input type="hidden" name="old_teacher" value="{{a.teacher}}">
+<input type="hidden" name="classroom" value="{{a.classroom}}">
+<input type="hidden" name="day" value="{{a.day}}">
+
+<select name="new_teacher">
+
+{% for t in teachers %}
+
+<option value="{{t.name}}">{{t.name}}</option>
+
+{% endfor %}
+
+</select>
+
+<button type="submit">Update</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<center>
+
+<a href="/faculty_download">
+<button class="submit-btn">Download Excel</button>
+</a>
+
+</center>
+
+</div>
+
+</body>
+</html>

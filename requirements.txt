@@ -1,0 +1,7 @@
+Flask
+pymongo
+dnspython
+pandas
+openpyxl
+xlsxwriter
+reportlab

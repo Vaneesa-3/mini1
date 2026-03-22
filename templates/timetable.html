@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internal Exam Automation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_friend.css') }}"><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="header">
+<h1>Internal Examination Management System</h1>
+<p>Faculty Allocation Module</p>
+</div>
+<div class="container">
+<div class="card">
+<h2>Enter Exam Schedule</h2>
+
+<form action="/generate" method="POST">
+
+    <label>Scheme for S7 / S8:</label>
+    <select name="senior_scheme">
+        <option value="2019">2019</option>
+        <option value="2024">2024</option>
+    </select>
+
+    <br><br>
+
+    <label>Paste Exam Schedule:</label>
+    <br>
+    <textarea name="raw_input" rows="15" style="width:100%;" required></textarea>
+
+    <br><br>
+    <button type="submit">Generate</button>
+
+</form>
+</div>
+</div>
+</body>
+</html>

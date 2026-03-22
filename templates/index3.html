@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internal Examination Management System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+</head>
+
+<body>
+
+<div class="header">
+<h1>Internal Examination Management System</h1>
+<p>Invigilator Allocation Module</p>
+</div>
+
+<div class="container">
+
+<form method="POST" action="/faculty_generate">
+
+<div class="card">
+
+<h2>Series Exam Details</h2>
+
+<label>Number of Exam Days</label>
+<input type="number" name="days" min="1" required>
+
+</div>
+
+
+<div class="card">
+
+<h2>Classrooms and Students</h2>
+
+<table class="input-table">
+
+<tr>
+<th>Classroom</th>
+<th>No of Students</th>
+</tr>
+
+<tr>
+<td>LH 9A</td>
+<td>
+<input type="hidden" name="classroom" value="LH 9A">
+<input type="number" name="students" required>
+</td>
+</tr>
+
+<tr>
+<td>LH 8A</td>
+<td>
+<input type="hidden" name="classroom" value="LH 8A">
+<input type="number" name="students" required>
+</td>
+</tr>
+
+<tr>
+<td>LH 7A</td>
+<td>
+<input type="hidden" name="classroom" value="LH 7A">
+<input type="number" name="students" required>
+</td>
+</tr>
+
+<tr>
+<td>LH 6A</td>
+<td>
+<input type="hidden" name="classroom" value="LH 6A">
+<input type="number" name="students" required>
+</td>
+</tr>
+
+<tr>
+<td>Seminar Hall</td>
+<td>
+<input type="hidden" name="classroom" value="Seminar Hall">
+<input type="number" name="students" required>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<center>
+<button class="submit-btn">Generate Schedule</button>
+</center>
+
+</form>
+
+</div>
+
+</body>
+</html>

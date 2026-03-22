@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Page Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin: 0px;
+padding:0px;
+color: #333;
+}
+.header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.header p {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+.container {
+    width: 90%;       /* or 100% */
+    max-width: none;  /* removes the 700px limit */
+    margin: 20px auto; /* optional top-bottom spacing */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #2a5298;
+    border-left: 4px solid #2a5298;
+    padding-left: 10px;
+}
+.classRow{
+margin:8px 0;
+}
+
+button{background: #2a5298;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+<div class="header">
+<h1>Internal Examination Management System</h1>
+<p>Attendance Sheet Generator</p>
+</div>
+<div class="container">
+<div class="card">
+
+
+
+<label>
+<input type="radio" name="sem" value="odd" checked> Odd
+</label>
+
+<label>
+<input type="radio" name="sem" value="even"> Even
+</label>
+
+<div id="classContainer"></div>
+
+<button onclick="confirmClasses()">OK</button>
+
+<hr>
+
+<div id="downloadSection"></div>
+
+</div>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+const odd=["S1","S3","S5","S7"];
+const even=["S2","S4","S6","S8"];
+
+function loadClasses(){
+
+let sem=document.querySelector("input[name=sem]:checked").value;
+
+let classes=(sem==="odd")?odd:even;
+
+let container=document.getElementById("classContainer");
+
+container.innerHTML="";
+
+classes.forEach(c=>{
+
+let div=document.createElement("div");
+
+div.className="classRow";
+
+div.innerHTML=
+`
+<input type="checkbox" id="chk_${c}">
+<label>${c}</label>
+
+<input type="number" placeholder="Strength" id="str_${c}">
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+loadClasses();
+
+document.querySelectorAll("input[name=sem]").forEach(r=>{
+r.addEventListener("change",loadClasses);
+});
+
+function confirmClasses(){
+
+let sem=document.querySelector("input[name=sem]:checked").value;
+
+let classes=(sem==="odd")?odd:even;
+
+let section=document.getElementById("downloadSection");
+
+section.innerHTML="<h3>Download Sheets</h3>";
+
+classes.forEach(c=>{
+
+let chk=document.getElementById("chk_"+c);
+
+let str=document.getElementById("str_"+c);
+
+if(chk.checked && str.value){
+
+let strength=parseInt(str.value);
+
+let btn=document.createElement("button");
+
+btn.innerText="Download "+c+" Sheet";
+
+btn.onclick=()=>generatePDF(c,strength);
+
+section.appendChild(btn);
+
+section.appendChild(document.createElement("br"));
+
+}
+
+});
+
+}
+
+function generatePDF(cls,strength){
+
+const {jsPDF}=window.jspdf;
+
+let pdf=new jsPDF("portrait","mm","a4");
+
+let pages=[
+[1,21],
+[22,42],
+[43,63],
+[64,strength]
+];
+
+pages.forEach((range,index)=>{
+
+if(index>0) pdf.addPage();
+
+drawPage(pdf,cls,range[0],range[1]);
+
+});
+
+pdf.save(cls+"_attendance.pdf");
+
+}
+
+function drawPage(pdf, cls, start, end){
+
+pdf.setFont("Times","Bold");
+pdf.setFontSize(14);
+
+pdf.text("ATTENDANCE SHEET - SERIES",60,15);
+
+pdf.setFontSize(11);
+
+pdf.text("CLASS: "+cls,20,25);
+
+pdf.text("Form No: EX 04(00)",130,25);
+
+pdf.text("L8A",170,25);
+
+let startX=20;
+let startY=35;
+
+let colWidth=25;
+let rowHeight=8;
+
+let columns=["Roll No","","","","","",""];
+
+
+// Draw header row
+columns.forEach((c,i)=>{
+
+pdf.rect(startX+i*colWidth,startY,colWidth,rowHeight);
+
+if(c){
+pdf.text(c,startX+i*colWidth+3,startY+5);
+}
+
+});
+
+startY+=rowHeight;
+
+
+// Draw rows
+for(let r=start;r<=end;r++){
+
+pdf.rect(startX,startY,colWidth,rowHeight);
+
+pdf.text(String(r),startX+5,startY+5);
+
+for(let c=1;c<7;c++){
+
+pdf.rect(startX+c*colWidth,startY,colWidth,rowHeight);
+
+}
+
+startY+=rowHeight;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

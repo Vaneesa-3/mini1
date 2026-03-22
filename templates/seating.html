@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exam Seating Generator</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style_my.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+<h1>Internal Examination Management System</h1>
+<p>Seating Arrangement Module</p>
+</div>
+
+
+
+
+<!-- Row 2 CLASSROOMS -->
+
+<div class="card">
+
+<h2>Select Classrooms</h2>
+
+<label>Semester:</label>
+
+<input type="radio" name="sem" value="odd" checked> Odd
+<input type="radio" name="sem" value="even"> Even
+
+<div class="grid" id="classrooms"></div>
+
+</div>
+
+
+<!-- Row 3 STUDENT CLASSES -->
+
+<div class="card">
+
+<h2>Student Classes</h2>
+
+<div id="studentClasses"></div>
+
+<button onclick="confirmClasses()">OK</button>
+
+</div>
+
+
+<div class="section result">
+
+<h2>Seating Arrangement</h2>
+
+<div id="output"></div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Mtech scholar 1",
+        "role": "Student",
+        "priority": 5,
+        "count": 5
+    },
+    {
+        "name": "Mtech scholar 2",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    },
+    {
+        "name": "Mtech scholar 3",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    },
+    {
+        "name": "Mtech scholar 4",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    },
+    {
+        "name": "Mtech scholar 5",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    },
+    {
+        "name": "Mtech scholar 6",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    },
+    {
+        "name": "Mtech scholar 7",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    },
+    {
+        "name": "Mtech scholar 8",
+        "role": "Student",
+        "priority": 5,
+        "count": 4
+    }
+]

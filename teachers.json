@@ -1,0 +1,108 @@
+[
+    {
+        "name": "Dr Swaraj K P",
+        "role": "HOD",
+        "priority": 1,
+        "count": 0
+    },
+    {
+        "name": "Gilesh M P",
+        "role": "Professor",
+        "priority": 2,
+        "count": 0
+    },
+    {
+        "name": "Dr Vipin Kumar K S",
+        "role": "Professor",
+        "priority": 2,
+        "count": 0
+    },
+    {
+        "name": "Ali Akbar N",
+        "role": "Associate Professor",
+        "priority": 3,
+        "count": 1
+    },
+    {
+        "name": "Bisna N D",
+        "role": "Associate Professor",
+        "priority": 3,
+        "count": 0
+    },
+    {
+        "name": "Rahamathulla K",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Dileesh E D",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Ezudheen P",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "George Mathew",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1,
+        "allowed_rooms": [
+            "LH 6A",
+            "LH 7A"
+        ]
+    },
+    {
+        "name": "Soni P",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Panchami V U",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Joby N J",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Anusree Radhakrishnan",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Nitha C Pankajakshan",
+        "role": "Assistant Professor",
+        "priority": 4,
+        "count": 1
+    },
+    {
+        "name": "Shehin Shams P",
+        "role": "Assistant Professor (Adhoc)",
+        "priority": 5,
+        "count": 0
+    },
+    {
+        "name": "Soumya Rajan",
+        "role": "Assistant Professor (Adhoc)",
+        "priority": 5,
+        "count": 1
+    },
+    {
+        "name": "Jithin Chandran",
+        "role": "Assistant Professor (Adhoc)",
+        "priority": 5,
+        "count": 1
+    }
+]
